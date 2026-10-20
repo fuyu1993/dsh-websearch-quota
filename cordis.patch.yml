@@ -1,0 +1,26 @@
+# dsh-websearch-quota bundle patch: one row, dual-face.
+#
+# The row name MUST equal the package name — the client-modules host half
+# resolves `require.resolve('<row-name>/package.json')` to find this package
+# and its `dsh.client` declaration, which is what serves ./client as the
+# browser bundle.
+#
+# The node half (lib/index.js) owns two things:
+#   - the /websearch-quota HTTP routes (snapshot + manual probe); every handler
+#     re-checks that the peer is the local loopback socket
+#   - the `tools/result` observer that turns every web_search / web_fetch /
+#     x_search / read_page result into ledger entries and keyless-limit evidence
+# The browser half (lib/client.js) registers the composer-dock badge that asks
+# the node half for the snapshot.
+#
+# Tunables (all optional) go on this row's `config:` block, e.g.
+#   config:
+#     dailyBudget: 50          # show "remaining today" against a self-set budget
+#     probeMinIntervalMs: 30000
+#     probeEnabled: true       # false hides the manual "probe" button
+#     keyQuotaTtlMs: 300000    # how long a vendor balance stays cached
+#     stateFile: /path/state.json
+#     modsearchConfigPath: /path/.modsearch/config.json
+- insert:
+    - id: dsh-websearch-quota
+      name: 'dsh-websearch-quota'
