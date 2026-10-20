@@ -1,5 +1,7 @@
 # dsh-websearch-quota
 
+基于 modsearch 做的免费额度次数查询的小插件。
+
 给 DSH（DeepSeek Harness）Web GUI 加一个常驻小徽章，回答一个问题：**这台机器现在还能免费用多少次 web 搜索？**
 
 徽章挂在输入框下方的环境行（client slot `conversation.composer.dock`），点开是一张明细卡片：限流窗口、本机记账、真实余额、手动探测。
